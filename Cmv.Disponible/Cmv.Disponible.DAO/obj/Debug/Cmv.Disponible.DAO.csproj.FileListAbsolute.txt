@@ -1,0 +1,9 @@
+c:\users\rexv666480\documents\visual studio 2012\Projects\Cmv.Disponible\Cmv.Disponible.DAO\bin\Debug\Cmv.Disponible.DAO.dll
+c:\users\rexv666480\documents\visual studio 2012\Projects\Cmv.Disponible\Cmv.Disponible.DAO\bin\Debug\Cmv.Disponible.DAO.pdb
+c:\users\rexv666480\documents\visual studio 2012\Projects\Cmv.Disponible\Cmv.Disponible.DAO\bin\Debug\AccesoDatos.dll
+c:\users\rexv666480\documents\visual studio 2012\Projects\Cmv.Disponible\Cmv.Disponible.DAO\bin\Debug\Cmv.Entidades.dll
+c:\users\rexv666480\documents\visual studio 2012\Projects\Cmv.Disponible\Cmv.Disponible.DAO\bin\Debug\Cmv.Entidades.pdb
+c:\users\rexv666480\documents\visual studio 2012\Projects\Cmv.Disponible\Cmv.Disponible.DAO\bin\Debug\AccesoDatos.pdb
+c:\users\rexv666480\documents\visual studio 2012\Projects\Cmv.Disponible\Cmv.Disponible.DAO\obj\Debug\Cmv.Disponible.DAO.csprojResolveAssemblyReference.cache
+c:\users\rexv666480\documents\visual studio 2012\Projects\Cmv.Disponible\Cmv.Disponible.DAO\obj\Debug\Cmv.Disponible.DAO.dll
+c:\users\rexv666480\documents\visual studio 2012\Projects\Cmv.Disponible\Cmv.Disponible.DAO\obj\Debug\Cmv.Disponible.DAO.pdb

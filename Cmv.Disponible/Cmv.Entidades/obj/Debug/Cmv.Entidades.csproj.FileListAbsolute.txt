@@ -1,0 +1,5 @@
+c:\users\rexv666480\documents\visual studio 2012\Projects\Cmv.Disponible\Cmv.Entidades\bin\Debug\Cmv.Entidades.dll
+c:\users\rexv666480\documents\visual studio 2012\Projects\Cmv.Disponible\Cmv.Entidades\bin\Debug\Cmv.Entidades.pdb
+c:\users\rexv666480\documents\visual studio 2012\Projects\Cmv.Disponible\Cmv.Entidades\obj\Debug\Cmv.Entidades.csprojResolveAssemblyReference.cache
+c:\users\rexv666480\documents\visual studio 2012\Projects\Cmv.Disponible\Cmv.Entidades\obj\Debug\Cmv.Entidades.dll
+c:\users\rexv666480\documents\visual studio 2012\Projects\Cmv.Disponible\Cmv.Entidades\obj\Debug\Cmv.Entidades.pdb
