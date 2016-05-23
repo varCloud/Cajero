@@ -19,11 +19,14 @@ namespace Cmv.Disponible.DAO
         public string SP_CMV_OBTENER_DATOS_USUARIO { get; set; }
         private string stringConection = string.Empty;
         private Dictionary<string, object> InfoUsuario { get; set; }
+        private string connectionString = string.Empty;
 
-        public SesionDAO(string instancia, string baseDatos)
+        public SesionDAO()
         {
-            Instancia = instancia;
-            BaseDatos = baseDatos;
+            //Instancia = instancia;
+            //BaseDatos = baseDatos;
+            this.connectionString = @"Server=cmv8020;Database=HAPE;User Id=SA1;Password=Abcde1";
+
             #region SP_DATOS_USUARIO
             this.SP_CMV_OBTENER_DATOS_USUARIO = @"	SELECT UPPER(A.USUARIO)USUARIO,UPPER(A.NOMBRE_S)NOMBRE,UPPER(A.APELLIDO_PATERNO)AP,UPPER(A.APELLIDO_MATERNO)AM,
 		                                            A.NUMEMP,A.ID_DE_SUCURSAL,UPPER(B.DESCRIPCION)SUCURSAL,B.REGION, UPPER(C.DESCRIPCION)AREA,UPPER(D.NOM_DEPARTAMENTO)DEPARTAMENTO,
@@ -74,9 +77,14 @@ namespace Cmv.Disponible.DAO
             {
                 try
                 {
-                    ContraseñaEncriptada = EncrypSHA1.EnciptaSHA1(usuario.noUsuario.ToString(), usuario.password).ToUpper().Substring(0, 30);
-                    stringConection = "Server =" + Instancia + "; Database =" + BaseDatos + "; User Id =" + usuario.usuario + " ;Password =" + ContraseñaEncriptada + "";
-                    using (SqlConnection con = new SqlConnection(stringConection))
+                    uint usr__ = Convert.ToUInt32(usuario.noUsuario);
+
+
+                    ContraseñaEncriptada = EncrypSHA1.EnciptaSHA1(usr__, usuario.password.ToString()).ToUpper().Substring(0, 30);
+                    
+
+                    //stringConection = "Server =" + Instancia + "; Database =" + BaseDatos + "; User Id =" + usuario.usuario + " ;Password =" + ContraseñaEncriptada + "";
+                    using (SqlConnection con = new SqlConnection(connectionString))
                     {
                         try
                         {
@@ -139,7 +147,7 @@ namespace Cmv.Disponible.DAO
         public Usuario ObtenerInformacionUsuarioLogeado(Usuario usuario)
         {
             Usuario usuario_ = null;
-            using (SqlConnection con = new SqlConnection(stringConection))
+            using (SqlConnection con = new SqlConnection(connectionString))
             {
                 try
                 {
