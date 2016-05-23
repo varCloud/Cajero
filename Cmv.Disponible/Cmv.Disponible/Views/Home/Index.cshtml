@@ -24,6 +24,9 @@
 <body class="fixed-left">
     <!-- Modal Start -->
     <!-- Modal Task Progress -->
+
+
+
     <div class="md-modal md-3d-flip-vertical" id="task-progress">
         <div class="md-content">
             <h3><strong>Task Progress</strong> Information</h3>
@@ -60,6 +63,7 @@
     </div>
 
     <!-- Modal Logout -->
+
     <div class="md-modal md-just-me" id="logout-modal">
         <div class="md-content">
             <h3><strong>Logout</strong> Confirmation</h3>
@@ -75,15 +79,20 @@
 
     <!-- Modal End -->
     <!-- Begin page -->
-
-    <div class="md-modal md-3d-slit" id="md-3d-slit">
+   <button data-modal="divEnviaCorreo" class="btn btn-default btn-sm md-trigger" id="btnAbrirDialog" style="display:none">3D Slit</button>
+    <div class="md-modal md-3d-slit" id="divEnviaCorreo">
         <div class="md-content">
-            <h3>Modal Dialog</h3>
+            <h3>Enviar correo de Aviso</h3>
              <div id="cuerpoDialogDetalle">
-                  	<p>Estas seguro que deseas mandar correo a las sucursales</p>
+                  	<p id="msjAlert"> </p>
 					<p>
-					<button class="btn btn-danger md-close">Cancelar</button>
-					<button class="btn btn-success">Enviar</button>
+                      @using (@Ajax.BeginForm("Enviar", new AjaxOptions() { HttpMethod = "Post", OnFailure = "OnFailure", OnBegin = "OnBegin", OnComplete = "OnComplete", OnSuccess = "OnSuccess" }))
+                      {
+                          
+                          @Html.Hidden("items", Json.Encode(Model.lstCajas3));
+                         <button type="button" class="btn btn-danger md-close" id="btnCerrarDialog">Cancelar</button>
+					     <button type="submit" class="btn btn-success">Enviar</button>
+                      }
 					</p>
             </div>
         </div>
@@ -761,11 +770,7 @@
                 </div>
                 <!-- End of info box -->
 
-          
-            <button data-modal="md-3d-slit" class="btn btn-default btn-sm md-trigger">3D Slit</button>
-
-
-            
+      
                 <div class="row">
                     <div class="col-md-12 portlets">
                         <div class="widget">
@@ -821,7 +826,7 @@
                                             </tfoot>
                                             <tbody id="cuerpoExcedidas">
                                                 @{
-                                                    int i =0;
+                                                    int i = 0;
                                                     foreach (Cmv.Entidades.Disponible item in @Model.lstCajas3)
                                                     {
                                                     <tr>
@@ -896,7 +901,7 @@
                         </div>
                     </div>
                 </div>
-
+            <div id="downCajas">
                 <div class="row" id="CajasCorrectas">
                     <div class="col-md-12">
                         <div class="widget">
@@ -950,10 +955,11 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
 
-
-                <div class="row">
+           
+           <div class="row">
                     <div class="col-lg-8 portlets">
                         <div id="website-statistics1" class="widget">
                             <div class="widget-header transparent">
@@ -1590,6 +1596,8 @@
     </script>
 
     @Scripts.Render("~/assets/libs/scriptTema")
+    @Scripts.Render("~/bundles/jqueryval")
+    
     @*    <script src="assets/libs/jquery/jquery-1-11-1-min.js"></script>
     <script src="assets/libs/bootstrap/js/bootstrap-min.js"></script>
     <script src="assets/libs/jqueryui/jquery-ui-1-10-4-custom-min.js"></script>
@@ -1600,8 +1608,7 @@
     <script src="assets/libs/jquery-datatables/js/jquery.dataTables.min.js"></script>
     <script src="assets/libs/jquery-datatables/js/dataTables.bootstrap.js"></script>
     <script src="assets/libs/jquery-datatables/extensions/TableTools/js/dataTables.tableTools.min.js"></script>
-
-
+   
     <script>
         Morris.Donut({
             element: 'donut-example',
@@ -1610,19 +1617,38 @@
             labelColor: '#060',
             data: [
               { label: "Cajas Correctas", value: @Model.lstCajas1.Count },
-           { label: "Cajas Proximas",  value: @Model.lstCajas2.Count },
-           { label: "Cajas Excedidas", value: @Model.lstCajas3.Count }
-            ],
-            colors: [
-                  '#209C83',
-                  '#F5B84F',
-                  '#DE745E',
-                  '#95D7BB'
-            ],
-        }).on('click', function (i, row) {  
-            Abrir(i);
-            //alert("");
-        });
+       { label: "Cajas Proximas",  value: @Model.lstCajas2.Count },
+       { label: "Cajas Excedidas", value: @Model.lstCajas3.Count }
+        ],
+        colors: [
+              '#209C83',
+              '#F5B84F',
+              '#DE745E',
+              '#95D7BB'
+        ],
+    }).on('click', function (i, row) {  
+          Abrir(i);
+    });
+
+        function OnBegin() {
+            $( "#btnCerrarDialog" ).trigger( "click" );
+        }
+        function OnSuccess(data) {
+            alert(data);
+        }
+        function OnFailure(request, error) {
+            alert("Error");
+
+        }
+        function OnComplete(request, status) {
+            alert("Completo")
+            if(data)
+                $("#md-3d-slit").modal('close');
+            else
+                alert(data);
+        } 
+
+
 
         $("#datatables-Excedidas").dataTable();
         $("#datatables-Proximas").dataTable();
@@ -1630,23 +1656,27 @@
 
         function Abrir(fila)
         {
-            alert(fila);
+           // alert(fila);
             switch (fila) {
                 case 0:
                     break;
                 case 1:
+                    $( "#downCajas" ).slideDown( "slow" , function() {
+                        alert ('Efecto slideDown con velocidad slow terminado!');
+                    });
+                   /* $("#msjAlert").html("<span>Estas seguro que deseas mandar correo a las sucursales  que estan por llegar al efectivo maximo permitido</span>");
+                    $( "#btnAbrirDialog" ).trigger( "click" );*/
                     break;
                 case 2:
-
+                    $( "#downCajas" ).slideDown( "slow" );
+                    /*$("#msjAlert").html("<span>Estas seguro que deseas mandar correo a las sucursales  que han excedido el efectivo maximo permitido</span>");
+                    $( "#btnAbrirDialog" ).trigger( "click" );*/
                     break;
                 default:
-        
             }
-            $("#md-3d-slit").modal('show');
-
         }
-
     </script>
+     <script src="~/Scripts/jsApp/indexApp.js"></script>
 </body>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 @*	<script src="assets/libs/jquery/jquery-1.11.1.min.js"></script>

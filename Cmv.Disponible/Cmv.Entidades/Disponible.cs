@@ -14,9 +14,9 @@ namespace Cmv.Entidades
         public string EstatusCaja { get; set; }
         public decimal DisponibleCaja { get; set; }
         public decimal MaximoDisponible { get; set; }
-        public List<Disponible> lstCajas1 { get; set; }
         public decimal PorcenjeUsado { get; set; }
         public Codigo codigo { get; set; }
+        public string correJefeSucursal { get; set; }
     }
 
   public enum Codigo

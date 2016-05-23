@@ -80,7 +80,7 @@ namespace Cmv.Disponible.DAO
                     uint usr__ = Convert.ToUInt32(usuario.noUsuario);
 
 
-                    ContraseñaEncriptada = EncrypSHA1.EnciptaSHA1(usr__, usuario.password.ToString()).ToUpper().Substring(0, 30);
+                    ContraseñaEncriptada = EncrypSHA1.EnciptaSHA1(usr__.ToString(), usuario.password.ToString()).ToUpper().Substring(0, 30);
                     
 
                     //stringConection = "Server =" + Instancia + "; Database =" + BaseDatos + "; User Id =" + usuario.usuario + " ;Password =" + ContraseñaEncriptada + "";

@@ -48,7 +48,7 @@ namespace Cmv.Disponible.DAO
                     d.DisponibleCaja = Convert.ToDecimal(db.DataReader["disponible_caja"].ToString());
                     d.MaximoDisponible = Convert.ToDecimal(db.DataReader["maximo_disponible"].ToString());
                     d.PorcenjeUsado = Convert.ToDecimal(db.DataReader["porcentaje_usado"].ToString());
-
+                    d.correJefeSucursal = db.DataReader["correo_jefe_sucursal"].ToString();
                     if ((Codigo)Convert.ToInt16(db.DataReader["codigo"]) == Codigo.verde)
                     {
                         d.codigo =Codigo.verde;
