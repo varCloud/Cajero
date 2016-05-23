@@ -16,7 +16,10 @@ namespace Cmv.Disponible.Controllers
 
         private Cmv.Disponible.DAO.SesionDAO SesionDAO = null;
         private Usuario usuario;
+        Usuario usr_ = new Usuario();
 
+        bool valido = false;
+        
 
         public ActionResult Login()
         {
@@ -48,24 +51,28 @@ namespace Cmv.Disponible.Controllers
                 //Usuario res = SesionDAO.ValidaUsuario(usuario);
                 if (SesionDAO.ValidaUsuario(usr))
                 {
-                    Usuario usr_ = new Usuario();
                     usr_ = SesionDAO.ObtenerInformacionUsuarioLogeado(usr);
-                    //return RedirectToAction("Index", "Home");
                     return RedirectToAction("Index", "Home", usr_);
-
+                    //valido = true;
                     //return Json(res, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
+                    ModelState.AddModelError("password", "Usuario / contraseña invalido");
                     return View("Login");
 
                 }
             }
             else
             {
-                ModelState.AddModelError("loginIncorrecto", "Usuario/contraseña invalido");
-                return View("MostrarLogin");
+                //ModelState.AddModelError("loginIncorrecto", "Usuario/contraseña invalido");
+                return View("Login");
             }
+
+            //if (valido)
+            //{
+            //    @Url.Action("Index", "Home", usr_);
+            //}
         }
 
 
