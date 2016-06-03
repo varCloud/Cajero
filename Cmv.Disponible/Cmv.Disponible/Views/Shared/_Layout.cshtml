@@ -1,4 +1,17 @@
-﻿<!DOCTYPE html>
+﻿
+@model Cmv.Entidades.Cajas
+
+@using Cmv.Entidades;
+
+@{
+    Usuario SesionUsuario = Session["SesionUsuario"] as Usuario;
+    if (SesionUsuario == null && ViewBag.Title != "Login")
+    {
+        Response.Redirect("/Sesion/Login");
+    }
+    }
+
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />

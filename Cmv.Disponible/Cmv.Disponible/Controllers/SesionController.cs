@@ -17,6 +17,7 @@ namespace Cmv.Disponible.Controllers
         private Cmv.Disponible.DAO.SesionDAO SesionDAO = null;
         private Usuario usuario;
         Usuario usr_ = new Usuario();
+        private Usuario SesionUsuario;
 
         bool valido = false;
         
@@ -51,8 +52,10 @@ namespace Cmv.Disponible.Controllers
                 //Usuario res = SesionDAO.ValidaUsuario(usuario);
                 if (SesionDAO.ValidaUsuario(usr))
                 {
-                    usr_ = SesionDAO.ObtenerInformacionUsuarioLogeado(usr);
-                    return RedirectToAction("Index", "Home", usr_);
+                    SesionUsuario = SesionDAO.ObtenerInformacionUsuarioLogeado(usr);
+                    //return RedirectToAction("Index", "Home");
+                    Session["SesionUsuario"] = SesionUsuario;
+                    return RedirectToAction("Inicio", "Inicio");
                     //valido = true;
                     //return Json(res, JsonRequestBehavior.AllowGet);
                 }

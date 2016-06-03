@@ -25,7 +25,7 @@ namespace Cmv.Disponible.DAO
         {
             //Instancia = instancia;
             //BaseDatos = baseDatos;
-            this.connectionString = @"Server=cmv8020;Database=HAPE;User Id=SA1;Password=Abcde1";
+            this.connectionString = @"Server=cmv8008\proyecto2;Database=HAPE;User Id=sa_temp;Password=Abcde1";
 
             #region SP_DATOS_USUARIO
             this.SP_CMV_OBTENER_DATOS_USUARIO = @"	SELECT UPPER(A.USUARIO)USUARIO,UPPER(A.NOMBRE_S)NOMBRE,UPPER(A.APELLIDO_PATERNO)AP,UPPER(A.APELLIDO_MATERNO)AM,

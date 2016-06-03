@@ -15,7 +15,7 @@ namespace Cmv.Disponible.DAO
        private string conexion = string.Empty;
        public DisponibleDAO()
        {
-           this.conexion = @"Server=cmv8024;Database=HAPE;User Id=SA1;Password=Abcde2";
+           this.conexion = @"Server=cmv8020;Database=HAPE;User Id=SA1;Password=Abcde1";
             
        }
         //verde =1,
