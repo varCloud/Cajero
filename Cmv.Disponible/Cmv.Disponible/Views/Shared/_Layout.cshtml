@@ -1,5 +1,4 @@
-﻿
-@model Cmv.Entidades.Cajas
+﻿@model Cmv.Entidades.Cajas
 
 @using Cmv.Entidades;
 
@@ -9,7 +8,7 @@
     {
         Response.Redirect("/Sesion/Login");
     }
-    }
+}
 
 <!DOCTYPE html>
 <html lang="es">
@@ -18,9 +17,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="description" content="">
-    <meta name="keywords" content="coco bootstrap template, coco admin, bootstrap,admin template, bootstrap admin,">
-    <meta name="author" content="Huban Creative">
+    <link href="~/assets/img/iconoCMV.ico" rel="shortcut icon" type="image/x-icon" />
     <title>@ViewBag.Title</title>
     @*@Styles.Render("~/assets/libs/cssTema")*@
     @*@Scripts.Render("~/bundles/modernizr")*@
@@ -28,27 +25,179 @@
 </head>
 
 
-    @if (@ViewBag.Title == "Login")
-    {
-        @RenderBody()
-    }
-    else
-    { 
-        <header>
+@if (@ViewBag.Title == "Login")
+{
+    @RenderBody()
+}
+else
+{ 
+@*<header>
         </header>
             @RenderBody()    
         <footer>
-        </footer>
-    }
+        </footer>*@
+        
+    <body class="fixed-left">
 
 
 
+        <div id="wrapper">
+
+            <!-- Top Bar Start -->
+            <div class="topbar">
+                <div class="topbar-left">
+                    <div class="logo">
+                        <h1><a href="#">
+                            <img src="~/assets/img/logoCMV.png" alt="Logo"></a></h1>
+                    </div>
+                    @*<button class="button-menu-mobile open-left">
+                    <i class="fa fa-bars"></i>
+                </button>*@
+                </div>
+            </div>
+
+
+            <!-- Top Bar End -->
+            <!-- Left Sidebar Start -->
+            <div class="left side-menu">
+                <div class="sidebar-inner slimscrollleft">
+                    <!-- Search form -->
+                    <br>
+                    <div class="clearfix"></div>
+                    <!--- Profile -->
+                    <div class="profile-info">
+                        <div class="col-xs-4">
+                            <a href="#" class="rounded-image profile-image">
+                                <img src="~/assets/img/users/Vic.jpg"></a>
+                        </div>
+                        <div class="col-xs-8">
+                            <h6>@SesionUsuario.nombre @SesionUsuario.apellidoPaterno </h6>
+                            <div class="profile-buttons">
+                                <a href="#" title="Cerrar Sesion"><i class="fa fa-power-off text-red-1"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--- Divider -->
+                    <div class="clearfix"></div>
+                    <hr class="divider" />
+                    <div class="clearfix"></div>
+
+                    <div id="sidebar-menu">
+                        <ul>
+                            <li class='has_sub'><a href='javascript:void(0);'>
+                                <i class='icon-home-3'></i><span>Aplicaciones</span> <span class="pull-right">
+                                    <i class="fa fa-angle-down"></i></span></a>
+                                <ul>
+                                    <li><a href='/Home/Index' class='active'><span>Disponibilidad Cajeros</span></a></li>
+                                    <li><a href='#'><span>Aplicacion 2</span></a></li>
+                                </ul>
+                            </li>
+
+
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="clearfix"></div>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </div>
+            <div class="content-page">
+                <!-- ============================================================== -->
+                <!-- Start Content here -->
+                <!-- ============================================================== -->
+                <div class="content">
+                    @RenderBody()
+                </div>
+                <!-- ============================================================== -->
+                <!-- End content here -->
+                <!-- ============================================================== -->
+                
+                <!-- Footer Start -->
+                <footer>
+                    Disponibilidad en Cajeros &copy; 2016
+                <div class="footer-links pull-right">
+                    <a href="#">help.desk@cmv.mx</a><a href="#">Tel: 31004</a>
+                </div>
+                </footer>
+                <!-- Footer End -->
+            </div>
+
+        </div>
+
+        <div class="md-overlay"></div>
+
+        <script>
+            var resizefunc = [];
+        </script>
+
+        @Scripts.Render("~/assets/libs/scriptTema")
+        @Scripts.Render("~/bundles/jqueryval")
+        <script src="~/assets/libs/jquery-datatables/js/jquery.dataTables.min.js"></script>
+        <script src="~/assets/libs/jquery-datatables/js/dataTables.bootstrap.js"></script>
+        <script src="~/assets/libs/jquery-datatables/extensions/TableTools/js/dataTables.tableTools.min.js"></script>
+
+        <script>
+
+
+
+            function OnBegin() {
+                $("#btnCerrarDialog").trigger("click");
+            }
+            function OnSuccess(data) {
+                alert(data);
+            }
+            function OnFailure(request, error) {
+                alert("Error");
+
+            }
+            function OnComplete(request, status) {
+                alert("Completo")
+                if (data)
+                    $("#md-3d-slit").modal('close');
+                else
+                    alert(data);
+            }
+
+
+
+            $("#datatables-Excedidas").dataTable();
+            $("#datatables-Proximas").dataTable();
+            $("#datatables-Correctas").dataTable();
+
+            function Abrir(fila) {
+                // alert(fila);
+                switch (fila) {
+                    case 0:
+                        break;
+                    case 1:
+                        $("#downCajas").slideDown("slow", function () {
+                            alert('Efecto slideDown con velocidad slow terminado!');
+                        });
+                        /* $("#msjAlert").html("<span>Estas seguro que deseas mandar correo a las sucursales  que estan por llegar al efectivo maximo permitido</span>");
+                         $( "#btnAbrirDialog" ).trigger( "click" );*/
+                        break;
+                    case 2:
+                        $("#downCajas").slideDown("slow");
+                        /*$("#msjAlert").html("<span>Estas seguro que deseas mandar correo a las sucursales  que han excedido el efectivo maximo permitido</span>");
+                        $( "#btnAbrirDialog" ).trigger( "click" );*/
+                        break;
+                    default:
+                }
+            }
+        </script>
+        <script src="~/Scripts/jsApp/indexApp.js"></script>
+    </body>
+        
+}
 
 
 
 @* @Scripts.Render("~/assets/libs/scriptTema")*@
-
-
 
 @* </body>*@
 </html>
