@@ -29,8 +29,9 @@ namespace Cmv.Disponible.Controllers
 
 
         [HttpPost]
-        public ActionResult ValidaLogin(Usuario usr)
+        public JsonResult ValidaLogin(Usuario usr)
         {
+            bool esUsuarioCorrecto = false;
             ModelState.Remove("conexion");
             ModelState.Remove("idDepartemento");
             ModelState.Remove("idRol");
@@ -55,23 +56,29 @@ namespace Cmv.Disponible.Controllers
                     SesionUsuario = SesionDAO.ObtenerInformacionUsuarioLogeado(usr);
                     //return RedirectToAction("Index", "Home");
                     Session["SesionUsuario"] = SesionUsuario;
-                    return RedirectToAction("Inicio", "Inicio");
+                    esUsuarioCorrecto = true;
+                    //return RedirectToAction("Inicio", "Inicio");
+
                     //valido = true;
                     //return Json(res, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
                     ModelState.AddModelError("password", "Usuario / contraseña invalido");
-                    return View("Login");
+                    esUsuarioCorrecto = false;
+                   // return View("Login");
 
                 }
             }
             else
             {
+                esUsuarioCorrecto = false;
                 //ModelState.AddModelError("loginIncorrecto", "Usuario/contraseña invalido");
-                return View("Login");
+                //return View("Login");
             }
 
+
+            return Json(esUsuarioCorrecto);
             //if (valido)
             //{
             //    @Url.Action("Index", "Home", usr_);

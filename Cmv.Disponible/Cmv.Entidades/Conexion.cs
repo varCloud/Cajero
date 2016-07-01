@@ -17,10 +17,7 @@ namespace Cmv.Entidades
         {
             return "Server=" + servidor + ";Database=" + baseDatos + ";User Id=" + usuario + ";Password=" + password;
         }
-        public string ObtenerConexion2()
-        {
-            return @"Server=cmv6008\proyectos;Database=HAPE;User Id=sa;Password=Jakevolu2428";
-        }
+ 
 
     }
 }

@@ -68,18 +68,20 @@ namespace Cmv.Utilerias
 
         private static void AgregarTO(List<string> TO)
         {
-            foreach (string item in TO)
-                mail.To.Add(item);
+            if (TO != null)
+                foreach (string item in TO)
+                    mail.To.Add(item);
 
         }
 
         private static void AgregarCC(List<string> CC)
         {
-            foreach (string item in CC)
-                mail.CC.Add(item);
+            if( CC != null)
+                foreach (string item in CC)
+                    mail.CC.Add(item);
 
         }
-        public static string Cabecera(string Asunto)
+        private static string Cabecera(string Asunto)
         {
             mail.Subject = Asunto;
             return "<html><body background='cid:imagenFondo'>";

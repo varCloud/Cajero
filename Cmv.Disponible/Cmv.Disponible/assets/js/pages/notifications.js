@@ -1,4 +1,4 @@
-function notify(style,position) {
+function notify(style,position,titulo,mensaje) {
 	if(style == "error"){
 		icon = "fa fa-exclamation";
 	}else if(style == "warning"){
@@ -11,8 +11,8 @@ function notify(style,position) {
 		icon = "fa fa-circle-o";
 	}
     $.notify({
-        title: 'Sample Notification',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vitae orci ut dolor scelerisque aliquam.',
+        title: titulo,
+        text: mensaje,
         image: "<i class='"+icon+"'></i>"
     }, {
         style: 'metro',

@@ -228,14 +228,15 @@ $( ".portlets" ).sortable({
 });
 
 // Init Code Highlighter
-prettyPrint();
+//prettyPrint();
 
 //RUN RESIZE ITEMS
 $(window).resize(debounce(resizeitems,100));
 $("body").trigger("resize");
 
-//SELECT
-$('.selectpicker').selectpicker();
+ //SELECT
+
+ $('.selectpicker').selectpicker();
 
 
 //FILE INPUT

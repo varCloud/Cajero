@@ -16,12 +16,12 @@
         <meta name="author" content="Huban Creative">
 
         <!-- Base Css Files -->
-@*        <link href="~/assets/libs/jqueryui/ui-lightness/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />*@
+@*      <link href="~/assets/libs/jqueryui/ui-lightness/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" />*@
         <link href="~/assets/libs/bootstrap/css/bootstrap_min.css" rel="stylesheet" />
         @*<link href="~/assets/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />*@
         @*<link href="~/assets/libs/fontello/css/fontello.css" rel="stylesheet" />*@
         @*<link href="~/assets/libs/animate-css/animate.min.css" rel="stylesheet" />*@
-       @* <link href="~/assets/libs/nifty-modal/css/component.css" rel="stylesheet" />
+        @*<link href="~/assets/libs/nifty-modal/css/component.css" rel="stylesheet" />
         <link href="~/assets/libs/magnific-popup/magnific-popup.css" rel="stylesheet" /> 
         <link href="~/assets/libs/ios7-switch/ios7-switch.css" rel="stylesheet" /> 
         <link href="~/assets/libs/pace/pace.css" rel="stylesheet" />
@@ -37,14 +37,13 @@
         <link href="~/assets/css/style-responsive.css" rel="stylesheet" />
 
 
-	    @Scripts.Render("~/bundles/modernizr")
-        <script src="~/assets/libs/jquery/jquery-1-11-1-min.js"></script>
-	    @*@Scripts.Render("~/bundles/jqueryval")*@
+	  @*  @Scripts.Render("~/bundles/modernizr")*@
 
+@*        <script src="~/assets/libs/jquery/jquery-1-11-1-min.js"></script>
         <script src="../../Scripts/jquery.validate.js"></script>
         <script src="../../Scripts/jquery.validate.unobtrusive.js"></script>
         <script src="~/Scripts/jquery-validate-bootstrap-tooltip.js"></script>
-        <script src="../../assets/libs/bootstrap/js/bootstrap-min.js"></script>
+        <script src="../../assets/libs/bootstrap/js/bootstrap-min.js"></script>*@
 
     <script src="../../Scripts/evtLogin.js"></script>
 @*     <script>
@@ -135,21 +134,24 @@
 				<div class="login-block">
 					<img src="~/images/users/default-user.png" class="img-circle not-logged-avatar">
 
-                    @using (Ajax.BeginForm("ValidaLogin", "Sesion", new AjaxOptions
+                   @using (Ajax.BeginForm("ValidaLogin", "Sesion", new AjaxOptions
                     {
                         HttpMethod = "post",
                         OnSuccess = "OnExito",
-                        OnFailure = "OnFailure",
-                        OnBegin = "OnBegin"
+                    //    //OnFailure = "OnFailure",
+                    //    //OnBegin = "OnBegin"
                     }, new { @id = "loginForm" }))
                         {
 
-                        <div class="form-group login-input">
+
+@*                     @using (Html.BeginForm("ValidaLogin", "Sesion", FormMethod.Post, new { @id = "loginForm" }))
+                     
+                     {
+                    *@<div class="form-group login-input">
 						    <i class="fa fa-user overlay"></i>
                             
 						    @Html.TextBoxFor(x => x.noUsuario, new { @class = "form-control text-input" , @placeholder = "Numero de Usuario, Ej. 1123"})
     		                @Html.ValidationMessageFor(x => x.noUsuario, "", new { @class = "text-danger" })
-                            @*<input type="text" class="form-control text-input" placeholder="Num. Usuario">*@
 						</div>
 						
                         <div class="form-group login-input">
@@ -215,5 +217,23 @@
     @*@Scripts.Render("~/bundles/jqueryval")*@
     @*<script src="../../Scripts/jquery-1.8.2.js"></script>*@    
 	</body>
+    <script>
+        function OnExito(data)
+        {
+            $("loadingCmv").css('display', 'inline');
+            if (data) {
+                
+                window.location.href = "@Url.Action("Cajeros","Cajeros")";
+            }
+            else {
+                alert("No puedo redireccionar")
+            }
+        }
 
+        function BeforeStartLogin()
+        {
+            $("loadingCmv").css('display', 'block');
+        }
+       
+    </script>
 </html>

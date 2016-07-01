@@ -2,6 +2,7 @@
 using Cmv.Entidades;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -23,9 +24,18 @@ namespace Cmv.Disponible.DAO
 
         public SesionDAO()
         {
-            //Instancia = instancia;
-            //BaseDatos = baseDatos;
-            this.connectionString = @"Server=cmv8008\proyecto2;Database=HAPE;User Id=sa_temp;Password=Abcde1";
+            try
+            {
+                this.connectionString = ConfigurationManager.ConnectionStrings["connectionForLogin"].ConnectionString;
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(connectionString);
+                Instancia = builder.DataSource;
+                BaseDatos = builder.InitialCatalog;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
 
             #region SP_DATOS_USUARIO
             this.SP_CMV_OBTENER_DATOS_USUARIO = @"	SELECT UPPER(A.USUARIO)USUARIO,UPPER(A.NOMBRE_S)NOMBRE,UPPER(A.APELLIDO_PATERNO)AP,UPPER(A.APELLIDO_MATERNO)AM,
@@ -202,6 +212,7 @@ namespace Cmv.Disponible.DAO
                 usuario.conexion.servidor = Instancia;
                 usuario.conexion.baseDatos = BaseDatos;
                 usuario.conexion.password = ContraseñaEncriptada;
+                usuario.conexion.usuario = usuario.usuario;
             }
             return usuario;
 

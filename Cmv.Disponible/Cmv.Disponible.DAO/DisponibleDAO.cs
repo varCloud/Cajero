@@ -13,9 +13,10 @@ namespace Cmv.Disponible.DAO
     {
        private DBManager db;
        private string conexion = string.Empty;
-       public DisponibleDAO()
+       public DisponibleDAO(string conexion)
        {
-           this.conexion = @"Server=cmv8008\proyecto2;Database=HAPE;User Id=sa_temp;Password=Abcde1";
+           this.conexion = conexion;
+               //@"Server=cmv8008\proyecto2;Database=HAPE;User Id=sa_temp;Password=Abcde1";
             
        }
         //verde =1,
@@ -33,7 +34,7 @@ namespace Cmv.Disponible.DAO
                db.CreateParameters(2);
                db.AddParameters(0, "@tipo_consulta", 1);
                db.AddParameters(1, "@cerrada", 0);
-               db.ExecuteReader(CommandType.StoredProcedure, "SP_CMV_CONSULTA_DISPONIBLE_CAJERO ");
+               db.ExecuteReader(CommandType.StoredProcedure, "SP_CMV_CONSULTA_DISPONIBLE_CAJERO");
                c.lstCajas1 = new List<Entidades.Disponible>();
                c.lstCajas2 = new List<Entidades.Disponible>();
                c.lstCajas3 = new List<Entidades.Disponible>();

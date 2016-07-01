@@ -8,6 +8,10 @@ namespace Cmv.Entidades
 {
   public  class Disponible
     {
+      public Disponible()
+      {
+          enviarCorreo = false;
+      }
         public string NumUsuario { get; set; }
         public string NombreUsuario { get; set; }
         public string DescSucursal { get; set; }
@@ -17,6 +21,7 @@ namespace Cmv.Entidades
         public decimal PorcenjeUsado { get; set; }
         public Codigo codigo { get; set; }
         public string correJefeSucursal { get; set; }
+        public bool enviarCorreo { get; set; }
     }
 
   public enum Codigo
